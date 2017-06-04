@@ -7,3 +7,7 @@ This machine learning competition is to challenge teams or individuals to develo
 The end goal is to submit predictions for the test set using a well-trained machine learning model, and achieve the highest F-score possible.
 
 More information about the competition can be found [here](https://www.kaggle.com/c/instacart-market-basket-analysis).
+
+## License
+
+The contents of this repository are covered under the [MIT License](LICENSE).
