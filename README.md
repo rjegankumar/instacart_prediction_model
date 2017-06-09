@@ -8,6 +8,8 @@ The end goal is to submit predictions for the test set using a well-trained mach
 
 More information about the competition can be found [here](https://www.kaggle.com/c/instacart-market-basket-analysis).
 
+More details on the data set, and how Instacart uses this dataset to improve their customer experience can be found in this [medium blog post](https://tech.instacart.com/3-million-instacart-orders-open-sourced-d40d29ead6f2).
+
 ## License
 
 The contents of this repository are covered under the [MIT License](LICENSE).
