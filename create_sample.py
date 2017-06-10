@@ -6,17 +6,17 @@ import numpy as np
 # create a sample of prior orders
 orders_df = pd.read_csv("Data/orders.csv")
 s = round(3214874 * 0.1)
-i = sorted(random.sample(range(1,3214874), s))
+i = sorted(random.sample(list(orders_df[orders_df["eval_set"]=="prior"].index), s))
 orders_df.loc[i,:].to_csv("Data/orders_prior_sample.csv", index = False)
 
 # create a sample of train orders
 s = round(131209 * 0.1)
-j = sorted(random.sample(range(1,131209), s))
+j = sorted(random.sample(list(orders_df[orders_df["eval_set"]=="train"].index), s))
 orders_df.loc[j,:].to_csv("Data/orders_train_sample.csv", index = False)
 
 # create a sample of test orders
 s = round(75000 * 0.1)
-k = sorted(random.sample(range(1,75000), s))
+k = sorted(random.sample(list(orders_df[orders_df["eval_set"]=="test"].index), s))
 orders_df.loc[k,:].to_csv("Data/orders_test_sample.csv", index = False)
 
 # create a sample of prior order products
