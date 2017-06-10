@@ -16,8 +16,8 @@ orders_df.loc[j,:].to_csv("Data/orders_train_sample.csv", index = False)
 
 # create a sample of prior order products
 order_products_prior_df = pd.read_csv('Data/order_products__prior.csv', index_col = 'order_id')
-order_products_prior_df.loc[orders_df.loc[i,:]['order_id'],:].to_csv("Data/order_products_prior_sample.csv", index = False)
+order_products_prior_df.loc[orders_df.loc[i,:]['order_id'],:].to_csv("Data/order_products_prior_sample.csv")
 
 # create a sample of train order products
 order_products_train_df = pd.read_csv('Data/order_products__train.csv', index_col = 'order_id')
-order_products_train_df.loc[orders_df.loc[j,:]['order_id'],:].to_csv("Data/order_products_train_sample.csv", index = False)
+order_products_train_df.loc[orders_df.loc[j,:]['order_id'],:].to_csv("Data/order_products_train_sample.csv")
