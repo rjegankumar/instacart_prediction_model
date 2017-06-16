@@ -27,6 +27,8 @@ def add_to_cart_orders(group):
     return ' '.join(l)
 
 grouped_data['add_to_cart_orders'] = grouped.apply(add_to_cart_orders)
+
+grouped_data['reordered'] = grouped['reordered'].aggregate(np.mean)['reordered'].round()
 print('First five rows of grouped_data:\n', grouped_data.head())
 
 orders_prior_merged = pd.merge(orders_prior_df, grouped_data, on='order_id')
