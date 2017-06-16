@@ -2,15 +2,19 @@
 import pandas as pd
 import numpy as np
 
+# loading data
 orders_prior_df = pd.read_csv('Data/orders_prior_sample.csv')
-
+orders_train_df = pd.read_csv('Data/orders_train_sample.csv')
 order_products_prior_df = pd.read_csv('Data/order_products_prior_sample.csv')
+order_products_train_df = pd.read_csv('Data/order_products_train_sample.csv')
 
-grouped = order_products_prior_df.groupby('order_id', as_index = False)
-
-grouped_data = pd.DataFrame()
-
-grouped_data['order_id'] = grouped['order_id'].aggregate(np.mean)
+def merging_prods_orders(grouped_df):
+    grp = pd.DataFrame()
+    grp['order_id'] = grouped_df['order_id'].aggregate(np.mean)
+    grp['product_ids'] = grouped_df.apply(product_ids)
+    grp['add_to_cart_orders'] = grouped_df.apply(add_to_cart_orders)
+    grp['reordered'] = grouped_df['reordered'].aggregate(np.mean)['reordered'].round()
+    return grp
 
 def product_ids(group):
     l = []
@@ -18,18 +22,24 @@ def product_ids(group):
         l.append(str(e))
     return ' '.join(l)
 
-grouped_data['product_ids'] = grouped.apply(product_ids)
-
 def add_to_cart_orders(group):
     l = []
     for e in group['add_to_cart_order']:
         l.append(str(e))
     return ' '.join(l)
 
-grouped_data['add_to_cart_orders'] = grouped.apply(add_to_cart_orders)
+# merging prior product data with orders data
+grouped_pr = order_products_prior_df.groupby('order_id', as_index = False)
+grouped_data_pr = merging_prods_orders(grouped_pr)
+print('First five rows of grouped_data_pr:\n', grouped_data_pr.head())
 
-grouped_data['reordered'] = grouped['reordered'].aggregate(np.mean)['reordered'].round()
-print('First five rows of grouped_data:\n', grouped_data.head())
+orders_prior_merged_pr = pd.merge(orders_prior_df, grouped_data_pr, on='order_id')
+print('First five rows of orders_prior_merged_pr:\n', orders_prior_merged_pr.head())
 
-orders_prior_merged = pd.merge(orders_prior_df, grouped_data, on='order_id')
-print('First five rows of orders_prior_merged:\n', orders_prior_merged.head())
+# merging train product data with orders data
+grouped_tr = order_products_train_df.groupby('order_id', as_index = False)
+grouped_data_tr = merging_prods_orders(grouped_tr)
+print('First five rows of grouped_data_tr:\n', grouped_data_tr.head())
+
+orders_prior_merged_tr = pd.merge(orders_train_df, grouped_data_tr, on='order_id')
+print('First five rows of orders_prior_merged_tr:\n', orders_prior_merged_tr.head())
