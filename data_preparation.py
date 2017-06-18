@@ -33,13 +33,15 @@ grouped_pr = order_products_prior_df.groupby('order_id', as_index = False)
 grouped_data_pr = merging_prods_orders(grouped_pr)
 print('First five rows of grouped_data_pr:\n', grouped_data_pr.head())
 
-orders_prior_merged_pr = pd.merge(orders_prior_df, grouped_data_pr, on='order_id')
-print('First five rows of orders_prior_merged_pr:\n', orders_prior_merged_pr.head())
+orders_prior_merged = pd.merge(orders_prior_df, grouped_data_pr, on='order_id')
+print('First five rows of orders_prior_merged:\n', orders_prior_merged.head())
+orders_prior_merged.to_csv('Data/orders_prior_merged.csv', index = False)
 
 # merging train product data with orders data
 grouped_tr = order_products_train_df.groupby('order_id', as_index = False)
 grouped_data_tr = merging_prods_orders(grouped_tr)
 print('First five rows of grouped_data_tr:\n', grouped_data_tr.head())
 
-orders_prior_merged_tr = pd.merge(orders_train_df, grouped_data_tr, on='order_id')
-print('First five rows of orders_prior_merged_tr:\n', orders_prior_merged_tr.head())
+orders_train_merged = pd.merge(orders_train_df, grouped_data_tr, on='order_id')
+print('First five rows of orders_train_merged:\n', orders_train_merged.head())
+orders_train_merged.to_csv('Data/orders_train_merged.csv', index = False)
