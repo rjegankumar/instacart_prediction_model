@@ -38,7 +38,7 @@ print('\nFirst five rows of grouped_data_pr:\n\n', grouped_data_pr.head())
 orders_prior_merged = pd.merge(orders_prior_df, grouped_data_pr, on='order_id')
 
 # replacing NaNs in days since prior order with 0
-orders_prior_merged[orders_prior_merged['days_since_prior_order'].isnull()]=0.0
+orders_prior_merged.fillna(inplace = True, value = 0.0)
 
 print('\nFirst five rows of orders_prior_merged:\n\n', orders_prior_merged.head())
 orders_prior_merged.to_csv('Data/orders_prior_merged.csv', index = False)
@@ -51,7 +51,7 @@ print('\nFirst five rows of grouped_data_tr:\n\n', grouped_data_tr.head())
 orders_train_merged = pd.merge(orders_train_df, grouped_data_tr, on='order_id')
 
 # replacing NaNs in days since prior order with 0
-orders_train_merged[orders_train_merged['days_since_prior_order'].isnull()]=0.0
+orders_train_merged.fillna(inplace = True, value = 0.0)
 
 print('\nFirst five rows of orders_train_merged:\n\n', orders_train_merged.head())
 orders_train_merged.to_csv('Data/orders_train_merged.csv', index = False)
