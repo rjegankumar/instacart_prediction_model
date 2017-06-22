@@ -5,12 +5,12 @@ import numpy as np
 
 # create a sample of prior orders
 orders_df = pd.read_csv("Data/orders.csv")
-s = round(3214874 * 0.1)
+s = round(3214874 * 0.01)
 i = sorted(random.sample(list(orders_df[orders_df["eval_set"]=="prior"].index), s))
 orders_df.loc[i,:].to_csv("Data/orders_prior_sample.csv", index = False)
 
 # create a sample of train orders
-s = round(131209 * 0.1)
+s = round(131209 * 0.01)
 j = sorted(random.sample(list(orders_df[orders_df["eval_set"]=="train"].index), s))
 orders_df.loc[j,:].to_csv("Data/orders_train_sample.csv", index = False)
 
