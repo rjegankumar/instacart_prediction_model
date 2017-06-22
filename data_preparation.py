@@ -14,19 +14,11 @@ def merging_prods_orders(grouped_df):
     grp = pd.DataFrame()
     grp['order_id'] = grouped_df['order_id'].aggregate(np.mean)
     grp['product_ids'] = grouped_df.apply(product_ids)
-    grp['add_to_cart_orders'] = grouped_df.apply(add_to_cart_orders)
-    grp['reordered'] = grouped_df['reordered'].aggregate(np.mean)['reordered'].round()
     return grp
 
 def product_ids(group):
     l = []
     for e in group['product_id']:
-        l.append(str(e))
-    return ' '.join(l)
-
-def add_to_cart_orders(group):
-    l = []
-    for e in group['add_to_cart_order']:
         l.append(str(e))
     return ' '.join(l)
 
